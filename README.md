@@ -32,18 +32,23 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 使用vim-plug
 安装：
     1. mkdir ~/.vim/autoload
-    2. curl -XGET "https://github.com/junegunn/vim-plug/blob/master/plug.vim" ~/.vim/autoload/
+    2. curl -XGET "https://github.com/junegunn/vim-plug/blob/master/plug.vim" -o ~/.vim/autoload/plug.vim
 
 ## 符号索引ctags
 使用universal-ctags
 安装：
     1. git clone https://github.com/universal-ctags/ctags.git
     2. Linux参照docs/autotools.rst说明进行安装
+       ./autogen.sh
+       ./configure --prefix=/usr/local/bin
+       make
+       sudo make install
 
 ## 符号自动索引
 使用ludovicchabant/vim-gutentags
 安装：
-    1. git clone https://github.com/ludovicchabant/vim-gutentags.git ~/.vim/pluged
+    1. Plug 'ludovicchabant/vim-gutentags'
+       或者git clone https://github.com/ludovicchabant/vim-gutentags.git ~/.vim/plugged
 
 ## 异步运行
 安装：Plug 'skywind3000/asyncrun.vim'
