@@ -32,12 +32,14 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 使用vim-plug
 安装：
     1. mkdir ~/.vim/autoload
-    2. curl -XGET "https://github.com/junegunn/vim-plug/blob/master/plug.vim" -o ~/.vim/autoload/plug.vim
+    2. cp plug.vim ~/.vim/autoload/plug.vim
+       或者curl -XGET "https://github.com/junegunn/vim-plug/blob/master/plug.vim" -o ~/.vim/autoload/plug.vim
 
 ## 符号索引ctags
 使用universal-ctags
 安装：
-    1. git clone https://github.com/universal-ctags/ctags.git
+    1. 本仓库已有
+       或者git clone https://github.com/universal-ctags/ctags.git
     2. Linux参照docs/autotools.rst说明进行安装
        ./autogen.sh
        ./configure --prefix=/usr/local/bin
