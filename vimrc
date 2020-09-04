@@ -37,7 +37,6 @@ set backspace=indent,eol,start
 
 "插件
 call plug#begin()
-
 Plug 'scrooloose/nerdtree'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -65,6 +64,7 @@ call plug#end()
 
 "ctags
 "call pathogen#helptags()
+
 "gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
@@ -200,7 +200,7 @@ xmap > ]
 set switchbuf=useopen,usetab,newtab
 
 
-"参数提示echodoc.vim
+" 参数提示echodoc.vim
 set cmdheight=2
 let g:echodoc_enable_at_startup = 1
 let g:echodoc#enable_at_startup = 1
@@ -242,6 +242,7 @@ let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 
 "快捷键设置
+
 
 filetype plugin indent on
 
