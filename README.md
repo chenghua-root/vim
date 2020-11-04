@@ -45,6 +45,16 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
        ./configure --prefix=/usr/local/bin
        make
        sudo make install
+    3. kind说明：http://ctags.sourceforge.net/FORMAT
+       c: class name
+       m: member
+       f: function or method name
+       F: file name
+       p: function prototype
+       s: struct name
+       t: typedef
+       u: union name
+       x: 前置声明
 
 ## 符号自动索引
 使用ludovicchabant/vim-gutentags
@@ -91,3 +101,8 @@ build-essential => yum install gcc gcc-c++ make
 cmake           => yum install cmake
 python3-dev     => yum install python3-devel
 
+
+## gtags
+使用指南：https://zhuanlan.zhihu.com/p/36279445
+使用指南：https://blog.csdn.net/weixin_33816821/article/details/91372655
+下载：http://tamacom.com/global/global-6.6.5.tar.gz
