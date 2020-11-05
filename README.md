@@ -109,3 +109,10 @@ python3-dev     => yum install python3-devel
 下载：http://tamacom.com/global/global-6.6.5.tar.gz
 
 ## Leaderf
+当使用了Lf_CacheDirectory配置，项目名中包含连接线"-"时，Leaderf gtags无法正确运行
+
+## deoplete.nvim
+安装指南：https://github.com/Shougo/deoplete.nvim
+Requirements：
+  1.确认支持python3 :echo exepath('python3')
+  2.sudo pip3 install pynvim

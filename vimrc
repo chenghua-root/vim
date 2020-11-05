@@ -62,6 +62,10 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'yegappan/grep'
 Plug 'chriskempson/base16-vim'
 
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'Shougo/deoplete.nvim'
+
 call plug#end()
 
 
@@ -260,6 +264,7 @@ let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+let g:Lf_PreviewInPopup = 1
 
 noremap <Leader>fm :LeaderfMru<cr>
 noremap <Leader>fc :LeaderfFunction!<cr>
@@ -271,6 +276,11 @@ noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand
 noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>                      "重新打开上次的搜索的窗口
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到下一个结果
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到上一个结果
+
+
+" deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"   "<TAB>: completion.
 
 
 "快捷键设置
