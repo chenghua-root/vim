@@ -100,13 +100,13 @@ endif
 set tags=./.tags;,.tags
 
 "gtags
-" 禁用 gutentags 自动加载 gtags 数据库的行为
-let g:gutentags_auto_add_gtags_cscope = 1
-
+"--auto-jump [<TYPE>] 意思是如果只有一个结果直接跳过去
+"--by-context 意思是：光标下如果是定义，就跳到引用处，如果是引用，就跳到定义处
+let g:gutentags_auto_add_gtags_cscope = 1            " 禁用 gutentags 自动加载 gtags 数据库的行为
 let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 let g:gutentags_define_advanced_commands = 1
-set cscopetag " 使用 cscope 作为 tags 命令
-set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
+set cscopetag                                        " 使用 cscope 作为 tags 命令
+set cscopeprg='gtags-cscope'                         " 使用 gtags-cscope 代替 cscope
 
 
 "异步编译asyncrun
@@ -247,6 +247,7 @@ let g:ycm_semantic_triggers =  {
            \ }
 
 "Yggdroot/LeaderF
+"Leaderf[!]:感叹号表示直接进入normal模式；如果没有感叹号则是输入模式；可以使用tab键进行切换
 let g:Lf_ShortcutF = "<leader>ff"
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_Gtagslabel = 'native-pygments'
@@ -264,11 +265,12 @@ noremap <Leader>fm :LeaderfMru<cr>
 noremap <Leader>fc :LeaderfFunction!<cr>
 noremap <Leader>fb :LeaderfBuffer<cr>
 noremap <Leader>ft :Leaderf tag --cword<cr>
-noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法引用
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法定义
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法引用(reference)
 noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR> "查找指定的字符串
-noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>                      "重新打开上次的搜索的窗口
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到下一个结果
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到上一个结果
 
 
 "快捷键设置

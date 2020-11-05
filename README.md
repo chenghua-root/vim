@@ -48,9 +48,9 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
     3. kind说明：http://ctags.sourceforge.net/FORMAT
        c: class name
        m: member
-       f: function or method name
+       f: function or method name #实现
        F: file name
-       p: function prototype
+       p: function prototype #声明
        s: struct name
        t: typedef
        u: union name
@@ -105,4 +105,7 @@ python3-dev     => yum install python3-devel
 ## gtags
 使用指南：https://zhuanlan.zhihu.com/p/36279445
 使用指南：https://blog.csdn.net/weixin_33816821/article/details/91372655
+使用指南：https://zhuanlan.zhihu.com/p/64842373
 下载：http://tamacom.com/global/global-6.6.5.tar.gz
+
+## Leaderf
