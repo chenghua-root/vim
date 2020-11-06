@@ -19,7 +19,7 @@
 	lowSpeedLimit = 200
 	postBuffer = 524288000  # 500MB
 [push]
-    default = simple
+    default = current
 
 #git log
 #git log -p [-1]          #显示最近一次提交修改的内容, -p表示--patch, -1表示只显示最近一次提交
@@ -36,3 +36,7 @@
 
 #git show $commit        #查看某次提交的代码
 #git show $commit --stat #查看某次提交的修改统计
+
+#git stash show          #查看修改统计，可指定stash, 默认为stash{0}
+#git stash show -p       #查看修改代码，可指定stash, 默认为stash{0}
+

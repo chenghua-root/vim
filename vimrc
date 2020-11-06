@@ -106,6 +106,7 @@ set tags=./.tags;,.tags
 "gtags
 "--auto-jump [<TYPE>] 意思是如果只有一个结果直接跳过去
 "--by-context 意思是：光标下如果是定义，就跳到引用处，如果是引用，就跳到定义处
+"gtags 存放路径: ~/.vim/cache/project-absolute-path/
 let g:gutentags_auto_add_gtags_cscope = 1            " 禁用 gutentags 自动加载 gtags 数据库的行为
 let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 let g:gutentags_define_advanced_commands = 1
@@ -252,6 +253,7 @@ let g:ycm_semantic_triggers =  {
 
 "Yggdroot/LeaderF
 "Leaderf[!]:感叹号表示直接进入normal模式；如果没有感叹号则是输入模式；可以使用tab键进行切换
+"Leaderf gtags 存放路径: ~/.vim/cache/.LfCache/gtags/\_project_absolute_path/
 let g:Lf_ShortcutF = "<leader>ff"
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_Gtagslabel = 'native-pygments'
@@ -266,10 +268,10 @@ let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 let g:Lf_PreviewInPopup = 1
 
-noremap <Leader>fm :LeaderfMru<cr>
+noremap <Leader>fm :Leaderf! mru<cr>           "显示最近打开的文件
 noremap <Leader>fc :LeaderfFunction!<cr>
 noremap <Leader>fb :LeaderfBuffer<cr>
-noremap <Leader>ft :Leaderf tag --cword<cr>
+noremap <Leader>ft :Leaderf! tag --cword<cr>
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法定义
 noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法引用(reference)
 noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR> "查找指定的字符串
