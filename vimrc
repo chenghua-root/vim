@@ -4,6 +4,7 @@ filetype off     "
 " map:      映射
 " noremap:  no recursive map. map b c, noremap a b, c不会被递归映射为a
 " nnoremap: normal模式下的noremap. n, v, i: 普通模式，visual模式，插入模式
+" <CR>：    自动回车
 
 set nocompatible "不与vi兼容
 set ruler
@@ -188,7 +189,6 @@ let g:echodoc#type = 'popup'
 
 " 索引跳转Yggdroot/LeaderF
 "Leaderf[!]:感叹号表示直接进入normal模式；如果没有感叹号则是输入模式；可以使用tab键进行切换
-let g:Lf_ShortcutF = "<leader>ff"
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_Gtagslabel = 'native-pygments'
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
@@ -199,20 +199,39 @@ let g:Lf_CacheDirectory = expand('~/.vim/cache')       "Leaderf gtags 存放路�
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_StlColorscheme = 'powerline'
-let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewResult = {
+        \ 'File': 0,
+        \ 'Buffer': 0,
+        \ 'Mru': 0,
+        \ 'Tag': 1,
+        \ 'BufTag': 1,
+        \ 'Function': 0,
+        \ 'Line': 1,
+        \ 'Colorscheme': 0,
+        \ 'Rg': 0,
+        \ 'Gtags': 0
+        \} "可自动预览的功能项
+let g:Lf_PreviewInPopup = 1  "弹窗预览, 使用'p'键即可预览
+map <C-u> <C-Up>   "scroll up in the popup preview window.
+map <C-d> <C-Down> "scroll down in the popup preview window.
 
-noremap <Leader>fm :Leaderf! mru<cr>           "显示最近打开的文件
-noremap <Leader>fc :LeaderfFunction!<cr>
-noremap <Leader>fb :LeaderfBuffer<cr>
-noremap <Leader>ft :Leaderf! tag --cword<cr>
+noremap <leader>ff :Leaderf file<cr>
+noremap <leader>fm :Leaderf! mru --cwd<cr>           "显示最近打开的文件, --cwd:只显示当前项目下最近打开的文件
+noremap <leader>fc :Leaderf! function<cr>
+noremap <leader>fb :Leaderf! buffer<cr>
+noremap <leader>fl :Leaderf! line<cr>
+noremap <leader>ft :Leaderf! tag --cword<cr>
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法定义
 noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法引用(reference)
 noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR> "查找指定的字符串
 noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>                      "重新打开上次的搜索的窗口
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到下一个结果
-noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到上一个结果
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>                     "跳到上一个结果
 
+noremap <leader>rg :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR><CR>            "search word under cursor, the pattern is treated as regex, and enter normal mode directly
+noremap <leader>rn :<C-U><C-R>=printf("Leaderf rg --next %s", "")<CR><CR>                            "跳到下一个结果
+noremap <leader>rp :<C-U><C-R>=printf("Leaderf rg --previous %s", "")<CR><CR>                        "跳到上一个结果
+noremap <leader>ro :<C-U><C-R>=printf("Leaderf! rg --recall %s", "")<CR><CR>                         "重新打开上次的搜索的窗口
 
 " 代码补全deoplete.nvim
 let g:deoplete#enable_at_startup = 1
@@ -229,6 +248,7 @@ nnoremap <F2> :NERDTreeToggle<CR>
 map <C-j> <C-W>j "切换窗口
 map <C-k> <C-W>k
 map <C-h> <C-W>h
+map <C-l> <C-W>l
 map <C-l> <C-W>l
 
 "nmap w, :vertical resize -5<CR> "调整窗口宽度
