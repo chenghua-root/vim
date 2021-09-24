@@ -2,24 +2,29 @@
   co = commit
   ck = checkout
   br = branch -vv
+  ci = commit
   st = status
+  stn = status -uno
   sl = stash list
   sa = stash apply stash@{0}
   sp = stash pop stash@{0}
   sd = stash drop stash@{0}
   coam = commit --amend -C HEAD
-  gr = log --oneline --graph --decorate
-  grm = log --oneline --graph --decorate --pretty=format:'%h %ar %an %s'
+  gr = log --oneline --graph --color --decorate
+  grm = log --oneline --graph --color --decorate --pretty=format:'%h %ar %an %s'
+  glog = log --graph --pretty=oneline --abbrev-commit --color --decorate
 [user]
   email = chenghua.ch@alibaba-inc.com
   name = chenghua.ch
 [http]
-    #连续800s传输速率低于200byte才会timeout
-	lowSpeedTime = 800      # git config --global http.lowSpeedTime 800
-	lowSpeedLimit = 200
-	postBuffer = 524288000  # 500MB
+  #连续800s传输速率低于200byte才会timeout
+  lowSpeedTime = 800      # git config --global http.lowSpeedTime 800
+  lowSpeedLimit = 200
+  postBuffer = 524288000  # 500MB
 [push]
-    default = current
+  default = current
+[color]
+        ui = true
 
 #git log
 #git log -p [-1]          #显示最近一次提交修改的内容, -p表示--patch, -1表示只显示最近一次提交
@@ -40,3 +45,4 @@
 #git stash show          #查看修改统计，可指定stash, 默认为stash{0}
 #git stash show -p       #查看修改代码，可指定stash, 默认为stash{0}
 
+#git branch -u origin/new-remote-branch-name  #更改跟踪分支
