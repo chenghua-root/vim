@@ -34,6 +34,7 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
     1. mkdir ~/.vim/autoload
     2. cp plug.vim ~/.vim/autoload/plug.vim
        或者curl -XGET "https://github.com/junegunn/vim-plug/blob/master/plug.vim" -o ~/.vim/autoload/plug.vim
+运行:PlugInstall
 
 ## 符号索引ctags
 使用universal-ctags
@@ -61,6 +62,7 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 安装：
     1. Plug 'ludovicchabant/vim-gutentags'
        或者git clone https://github.com/ludovicchabant/vim-gutentags.git ~/.vim/plugged
+    2. pip install pygments
 
 ## 异步运行
 安装：Plug 'skywind3000/asyncrun.vim'

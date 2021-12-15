@@ -3,6 +3,8 @@
 " nnoremap: normal模式下的noremap. n, v, i: 普通模式，visual模式，插入模式
 " <CR>：    自动回车
 
+" 命令使用说明
+" 全局搜索: Grep -r
 "**********************************************************
 
 syntax on        " 语法高亮
@@ -15,6 +17,8 @@ set copyindent
 set tabstop=4
 set expandtab
 set modifiable
+set write
+set buftype=
 
 set backspace=indent,eol,start
 colorscheme default             " /usr/share/vim/vim74/colors/ koehler:peachpuff:ron:slate
@@ -44,13 +48,13 @@ endif
 call plug#begin()
 Plug 'scrooloose/nerdtree'              " 目录树
 Plug 'skywind3000/asyncrun.vim'         " 异步执行
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'     " ctags/gtags管理
 Plug 'dense-analysis/ale'               " 代码动态检查
-Plug 'mhinz/vim-signify'
-Plug 'fatih/vim-go'
-"Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'Shougo/echodoc.vim'               " 参数提醒
+Plug 'mhinz/vim-signify'                " 左边栏显示git代码修改状态
+Plug 'fatih/vim-go'                     " vim-go插件
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } " LeaderF插件
+Plug 'Shougo/echodoc.vim'               " 参数提示
+Plug 'tpope/vim-fugitive'               " Git blame/commit/diff
 
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
@@ -62,24 +66,37 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'yegappan/grep'
 Plug 'chriskempson/base16-vim'
 
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
-Plug 'Shougo/deoplete.nvim'             " 代码补齐提醒
-
-Plug 'tpope/vim-fugitive'
+Plug 'roxma/vim-hug-neovim-rpc'         " Shougo/deoplete.nvim依赖
+Plug 'roxma/nvim-yarp'                  " Shougo/deoplete.nvim依赖
+Plug 'Shougo/deoplete.nvim'             " 补齐提示
 
 call plug#end()
 
 
-" ctags
-" call pathogen#helptags()
+" gtags
+" --auto-jump [<TYPE>] 意思是如果只有一个结果直接跳过去
+" --by-context ：光标下如果是定义，就跳到引用处，如果是引用，就跳到定义处
+let $GTAGSLABEL = 'native-pygments'                  " 6 种语言（C，C++，Java，PHP4，Yacc，汇编）使用native即gtags本地分析器，其它语言使用pygments分析器
+let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
+set cscopetag                                        " 使用 cscope 作为 tags 命令
+set cscopeprg='gtags-cscope'                         " 使用 gtags-cscope 代替 cscope
 
-" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.vim/cache')              " 将自动生成的 tags 文件全部放入 ~/.vim/cache 目录中，避免污染工程目录
+if !isdirectory(s:vim_tags)                          " 检测 ~/.vim/cache 不存在就新建
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+set tags=./.tags;,.tags
 
-" 同时开启 ctags 和 gtags 支持：
-let g:gutentags_modules = []
+
+" gutentags 管理ctags和gtags索引
+" 多数功能已被LeaderF代替
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project'] " gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_ctags_tagfile = '.tags'              " 所生成的数据文件的名称
+let g:gutentags_cache_dir = s:vim_tags               " gtags 存放路径: ~/.vim/cache/project-absolute-path
+let g:gutentags_define_advanced_commands = 1         " 高级特性, :GutentagsToggleTrace打开命令日志, :messages查看日志
+let g:gutentags_auto_add_gtags_cscope = 1            " gutentags 自动加载 gtags 数据库
+
+let g:gutentags_modules = []                         " 同时开启 ctags 和 gtags 支持：
 if executable('ctags')
 	let g:gutentags_modules += ['ctags']
 endif
@@ -87,33 +104,11 @@ if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
 endif
 
-" 将自动生成的 tags 文件全部放入 ~/.vim/cache 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.vim/cache')
-let g:gutentags_cache_dir = s:vim_tags
-
-" 配置 ctags 的参数
+" 配置管理 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-" 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
-" let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-" 检测 ~/.vim/cache 不存在就新建
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
-endif
-set tags=./.tags;,.tags
-
-" gtags
-" --auto-jump [<TYPE>] 意思是如果只有一个结果直接跳过去
-" --by-context 意思是：光标下如果是定义，就跳到引用处，如果是引用，就跳到定义处
-" gtags 存放路径: ~/.vim/cache/project-absolute-path/
-let g:gutentags_auto_add_gtags_cscope = 1            " 禁用 gutentags 自动加载 gtags 数据库的行为
-let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
-let g:gutentags_define_advanced_commands = 1
-set cscopetag                                        " 使用 cscope 作为 tags 命令
-set cscopeprg='gtags-cscope'                         " 使用 gtags-cscope 代替 cscope
+"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags'] " 如果使用universal ctags需要增加此行，老的Exuberant-ctags不能加此行
 
 
 " 异步编译asyncrun
@@ -158,20 +153,8 @@ let g:ale_linters = {
   \}
 
 
-" 修改比较vim-signify
-" set signcolumn=yes " 侧边栏在没有修改的情况下也一直显示
+" git修改比较 vim-signify
 set updatetime=100  " updatetime 100ms
-
-
-" 代码高亮highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1  " 高亮成员变量
-let g:cpp_class_decl_highlight = 1       " 高亮class声明类名
-let g:cpp_posix_standard = 1             " 高亮posix函数
-let g:cpp_experimental_simple_template_highlight = 1 " 高亮模板
-let g:cpp_experimental_template_highlight = 1 " 高亮模板
-let g:cpp_concepts_highlight = 1         " library concepts
-let c_no_curly_error=1
 
 
 " 窗口管理 vim-unimpaired
@@ -185,11 +168,12 @@ set switchbuf=useopen,usetab,newtab
 
 
 " 参数提示echodoc.vim
+" 需配合YCM使用
 set cmdheight=2
 set noshowmode                          " 关闭模式提示
-let g:echodoc_enable_at_startup = 1
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'popup'
+"let g:echodoc_enable_at_startup = 1
+"let g:echodoc#enable_at_startup = 1
+"let g:echodoc#type = 'popup'
 
 
 " 索引跳转Yggdroot/LeaderF
@@ -227,7 +211,7 @@ noremap <leader>fb :Leaderf! buffer<cr>
 noremap <leader>fl :Leaderf! line<cr>
 noremap <leader>ft :Leaderf tag<cr>
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法定义
-noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法引用(reference)
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法声明和引用(reference)
 noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR> "查找指定的字符串
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>                         "跳到下一个结果
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>                     "跳到上一个结果
@@ -254,7 +238,6 @@ nnoremap <F2> :NERDTreeToggle<CR>
 map <C-j> <C-W>j "切换窗口
 map <C-k> <C-W>k
 map <C-h> <C-W>h
-map <C-l> <C-W>l
 map <C-l> <C-W>l
 
 "nmap w, :vertical resize -5<CR> "调整窗口宽度
