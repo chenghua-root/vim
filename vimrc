@@ -67,6 +67,7 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }  " LeaderF插件
 Plug 'tpope/vim-fugitive'                          " Git blame/commit/diff
 Plug 'jiangmiao/auto-pairs'                        " 自动补全括号的插件，包括小括号，中括号，以及花括号
 Plug 'tpope/vim-unimpaired'                        " 窗口管理
+Plug 'mhinz/vim-startify'                          " vim启动界面
 
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
@@ -130,7 +131,7 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 
 "==============================================================================
-" 异步编译asyncrun
+" asyncrun 异步编译
 "==============================================================================
 let g:asyncrun_open = 20                             " 自动打开 quickfix window ，高度为 6
 let g:asyncrun_bell = 1                              " 任务结束时候响铃提醒
@@ -237,7 +238,7 @@ noremap <leader>fm :Leaderf! mru --cwd<cr>           "显示最近打开的文�
 noremap <leader>fc :Leaderf! function<cr>
 noremap <leader>fb :Leaderf! buffer<cr>
 noremap <leader>fl :Leaderf! line<cr>
-noremap <leader>ft :Leaderf tag<cr>
+noremap <leader>ft :Leaderf tag<cr>                  "搜索输入的字符串
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法定义
 noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法声明和引用(reference)
 noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR> "查找指定的字符串
@@ -286,6 +287,16 @@ let g:godef_split=2
 nnoremap <F2> :NERDTreeToggle<CR> " 打开和关闭NERDTree快捷键
 
 
+"==============================================================================
+" vim-startify
+"==============================================================================
+let g:startify_padding_left = 100
+let g:startify_bookmarks = [
+            \ {'v': '~/.vimrc'},
+            \ {'cs': '/disk1/chenghua.ch/git/chunk_server'},
+            \ ]
+
+
 "**************************************************************************************************
 
 
@@ -307,7 +318,7 @@ nmap ,v "+p
 vmap ,c "+yy
 nmap ,c "+yy
 
-nnoremap j gj " 按实际行移动，一行代码换成多个实际行，每次按实际行移动
+"nnoremap j gj " 按实际行移动，一行代码换成多个实际行，每次按实际行移动
 nnoremap k gk
 
 "{{{  plugin-格式化代码
