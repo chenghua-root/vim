@@ -13,6 +13,7 @@ syntax on                 " 语法高亮
 filetype plugin indent on " 开启文件类型探测，根据文件类型加载插件(plugin), 定义缩进格式(indent)
 let mapleader=','         " default is '\'
 
+let $MYVIMRC = '~/.vimrc'
 if has("autocmd")         " 记录文件上次浏览的位置
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   autocmd! bufwritepost vimrc source $MYVIMRC
@@ -31,12 +32,12 @@ set copyindent
 set tabstop=4    " 设置Tab长度为4空格
 set expandtab
 set modifiable
-set write
 set buftype=
+set write
 set shiftwidth=4 " 设置自动缩进长度为4空格
 set nu           " 设置行号
 set incsearch    " 开启实时搜索，输入字符后立即自动匹配
-" set ignorecase   " 搜索时大小写不敏感
+"set ignorecase   " 搜索时大小写不敏感
 
 set backspace=indent,eol,start
 colorscheme default             " /usr/share/vim/vim74/colors/ koehler:peachpuff:ron:slate
@@ -230,15 +231,21 @@ let g:Lf_PreviewResult = {
         \ 'Gtags': 0
         \} "可自动预览的功能项
 let g:Lf_PreviewInPopup = 1  "弹窗预览, 使用'p'键即可预览
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_WildIgnore={'file':['*.html', '*.txt'],'dir':['3rdparty']}   "忽略文件和目录
+let g:Lf_StlColorscheme = 'powerline'
 "map <C-u> <C-Up>   "scroll up in the popup preview window.
 "map <C-d> <C-Down> "scroll down in the popup preview window.
 
-noremap <leader>ff :Leaderf file<cr>
+noremap <leader>f  :Leaderf! self<cr>
+noremap <leader>fch :Leaderf! cmdHistory<cr>
+noremap <leader>fsh :Leaderf! searchHistory<cr>
+noremap <leader>ff :Leaderf  file<cr>
 noremap <leader>fm :Leaderf! mru --cwd<cr>           "显示最近打开的文件, --cwd:只显示当前项目下最近打开的文件
 noremap <leader>fc :Leaderf! function<cr>
 noremap <leader>fb :Leaderf! buffer<cr>
 noremap <leader>fl :Leaderf! line<cr>
-noremap <leader>ft :Leaderf tag<cr>                  "搜索输入的字符串
+noremap <leader>ft :Leaderf  tag<cr>
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法定义
 noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR> "查找函数/方法声明和引用(reference)
 noremap <leader>fg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR> "查找指定的字符串
@@ -251,6 +258,17 @@ noremap <leader>rn :<C-U><C-R>=printf("Leaderf rg --next %s", "")<CR><CR>       
 noremap <leader>rp :<C-U><C-R>=printf("Leaderf rg --previous %s", "")<CR><CR>                        "跳到上一个结果
 noremap <leader>ro :<C-U><C-R>=printf("Leaderf! rg --recall %s", "")<CR><CR>                         "重新打开上次的搜索的窗口
 noremap <leader>rt :<C-U><C-R>="Leaderf rg"<CR><CR>
+
+nmap <unique> <leader>re <Plug>LeaderfRgPrompt
+"noremap <leader>re :Leaderf rg -e              -e 正则表达式搜索
+nmap <unique> <leader>ra <Plug>LeaderfRgCwordLiteralNoBoundary
+"noremap <leader>ra :Leaderf rg -F -e           -F 搜索字符串而不是正则表达式
+nmap <unique> <leader>rb <Plug>LeaderfRgCwordLiteralBoundary
+"noremap <leader>rb :Leaderf rg -F -w -e        -w 搜索匹配word边界的词
+nmap <unique> <leader>rc <Plug>LeaderfRgCwordRegexNoBoundary
+"noremap <leader>rc :Leaderf rg -e
+nmap <unique> <leader>rd <Plug>LeaderfRgCwordRegexBoundary
+"noremap <leader>rd :Leaderf rg -w -e
 
 
 "==============================================================================
@@ -293,7 +311,7 @@ nnoremap <F2> :NERDTreeToggle<CR> " 打开和关闭NERDTree快捷键
 let g:startify_padding_left = 100
 let g:startify_bookmarks = [
             \ {'v': '~/.vimrc'},
-            \ {'cs': '/disk1/chenghua.ch/git/chunk_server'},
+            \ {'b': '~/.bashrc'},
             \ ]
 
 
