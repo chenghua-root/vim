@@ -26,18 +26,20 @@ endif
 "**************************************************************************************************
 
 
-set nocompatible " 不与vi兼容
+set encoding=utf-8
+set nocompatible    " 不与vi兼容
 set ruler
 set copyindent
-set tabstop=4    " 设置Tab长度为4空格
+set tabstop=4       " 设置Tab长度为4空格
 set expandtab
 set modifiable
 set buftype=
 set write
-set shiftwidth=4 " 设置自动缩进长度为4空格
-set nu           " 设置行号
-set incsearch    " 开启实时搜索，输入字符后立即自动匹配
-"set ignorecase   " 搜索时大小写不敏感
+set shiftwidth=4    " 设置自动缩进长度为4空格
+set nu              " 设置行号
+set incsearch       " 开启实时搜索，输入字符后立即自动匹配
+"set ignorecase      " 搜索时大小写不敏感
+set updatetime=1000 " milliseconds, the swap file will be written to disk
 
 set backspace=indent,eol,start
 colorscheme default             " /usr/share/vim/vim74/colors/ koehler:peachpuff:ron:slate
@@ -303,6 +305,8 @@ let g:godef_split=2
 " NERDTree
 "==============================================================================
 nnoremap <F2> :NERDTreeToggle<CR> " 打开和关闭NERDTree快捷键
+" NERDTreeFind: 打开nerdtree并跳转到当前文件的位置
+" r: 刷新nerdtree文件列表，有延迟，需删除文件后等一会执行
 
 
 "==============================================================================
