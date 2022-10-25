@@ -3,19 +3,18 @@
 
 本vim配置参照韦易笑在知乎的回答[如何在Linux下利用Vim搭建C/C++ 开发环境?](https://www.zhihu.com/question/47691414/answer/373700711)
 
-
 ## 环境说明
-CentOS7 + VIM8(依赖python3)
+CentOS7 + VIM8(安装时依赖python3)
 vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 
 
 ## python3
 参考：https://www.liquidweb.com/kb/how-to-install-python-3-on-centos-7/
-1. yum update -y
 2. yum install -y python3
 3. ll /usr/bin/python\*
 4. sudo rm /usr/bin/python
 5. sudo ln -s /usr/bin/python3.6 /usr/bin/python
+6. 安装完VIM8后可以换回python2
 
 
 ## VIM8安装介绍
@@ -135,3 +134,7 @@ python3-dev     => yum install python3-devel
 安装指南：https://github.com/Shougo/deoplete.nvim
 Requirements：
   1.sudo pip3 install pynvim
+
+
+## coc.nvim
+参考CocReadme.md

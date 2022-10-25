@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.inlayHints.enable": false,  // 语法背景
+    "clangd.disableCompletion": false,         // 支持LSP提示补全，提示时包含参数; 默认为false
+    "suggest.noselect": true,                  // 补全提示时不选中
+    "suggest.autoTrigger": "none"
+}

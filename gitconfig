@@ -8,7 +8,8 @@
   sa = stash apply stash@{0}
   sp = stash pop stash@{0}
   sd = stash drop stash@{0}
-  coam = commit --amend -C HEAD
+  pk = cherry-pick
+  am = commit --amend -C HEAD
   gr = log --oneline --graph --color --decorate
   grm = log --oneline --graph --color --decorate --pretty=format:'%h %ar %an %s'
   glog = log --graph --pretty=oneline --abbrev-commit --color --decorate
@@ -45,3 +46,6 @@
 #git stash show -p       #查看修改代码，可指定stash, 默认为stash{0}
 
 #git branch -u origin/new-remote-branch-name  #更改跟踪分支
+
+#git push origin --delete branch-name         #删除远程分支
+#git branch -d branch-name                    #删除本地分支
