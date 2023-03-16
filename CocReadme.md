@@ -42,7 +42,7 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 会在build目录产生compile_commands.json
 
 把build/compile_commands.json链接到项目根目录
-ln -s myproject/build/compile_commands.json myproject/
+ln -s build/compile_commands.json .
 
 ## Rust插件
 安装指南：https://blog.csdn.net/m0_37952030/article/details/118372011
