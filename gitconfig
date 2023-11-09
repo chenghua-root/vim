@@ -44,10 +44,30 @@
 
 #git stash show          #查看修改统计，可指定stash, 默认为stash{0}
 #git stash show -p       #查看修改代码，可指定stash, 默认为stash{0}
+#git stash push -m message specific_files      #stash指定文件
 
 #git branch -u origin/new-remote-branch-name  #更改跟踪分支
 
 #git push origin --delete branch-name         #删除远程分支
 #git branch -d branch-name                    #删除本地分支
+#git remote prune origin                      #清除远程仓库已不存在但本地远程仓库中仍然存在的分支
 
 #git push出错时调试: GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push
+
+# git cherry-pick A..B              # ignore A
+# git cherry-pick A^..B             # include A
+# git cherry-pick branch~n branch   # the latest n+1 commits
+# git cherry-pick branch~n branch~m # the [n+1, m+1] commits
+
+# 合并
+# git rebase origin/xxx   # 当前分支的commit依次rebase, 需多次解决冲突
+# git merge origin/xxx    # 当前分支的commit全量合并origin/xxx分支, 一次性解决所有冲突
+
+# tag
+# git tag  # 列出所有tag
+# git tag -a <tag_name> <commit> # 基于某个commit打tag
+# git push origin <tag_name>     # 把tag push到远端
+# git tag -d <tagname>           # 删除本地tag
+# git push origin :refs/tags/<tagname> # 删除远端tag
+# git fetch --tags -f            # 更新本地tags
+# git ck -b {tag} tags/{tag}
