@@ -35,7 +35,7 @@ set expandtab
 set modifiable
 set buftype=
 set write
-set shiftwidth=4    " 设置自动缩进长度为4空格
+set shiftwidth=2    " 设置自动缩进长度为2空格
 set nu              " 设置行号
 set incsearch       " 开启实时搜索，输入字符后立即自动匹配
 "set ignorecase      " 搜索时大小写不敏感

@@ -1,5 +1,15 @@
+## coc依赖
+### node
+coc依赖node(>=16.18)
+安装node参考: https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
+- curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+### clangd
+:CocCommand clangd.install
+
 ## coc配置
 coc配置分为用户配置文件和项目配置文件，项目配置文件会合并覆盖用户配置文件
+配置路径: ~/.vim/coc-settings.json
 
 ### 用户配置
 :CocConfig        // 打开配置文件，一般为~/.vim/coc-settings.json
@@ -13,7 +23,6 @@ coc帮助文档 ~/.vim/plugged/coc.nvim/doc/coc.txt
 
 ## coc日志
 :CocOpenLog
-
 
 ## coc插件
 CocInstall coc-json coc-tsserver coc-clangd coc-rust-analyzer
@@ -47,3 +56,8 @@ ln -s build/compile_commands.json .
 ## Rust插件
 安装指南：https://blog.csdn.net/m0_37952030/article/details/118372011
 :CocInstall coc-rust-analyzer   // 进入rs文件后，会提示是否下载rust-analyzer
+
+## 问题
+
+### Error on notification "jumpDefinition"
+查看对应语言的coc server是否启动。执行:CocList services

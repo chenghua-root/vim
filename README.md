@@ -16,6 +16,12 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 5. sudo ln -s /usr/bin/python3.6 /usr/bin/python
 6. 安装完VIM8后可以换回python2
 
+## VIM9安装(ubuntu)
+参考 https://itsfoss.com/install-latest-vim-ubuntu/
+- sudo add-apt-repository ppa:jonathonf/vim
+- sudo apt update
+- sudo apt install vim
+- vim --version
 
 ## VIM8安装介绍
 1. 下载: git clone git@github.com:vim/vim.git
@@ -42,9 +48,8 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 ## 插件管理器
 使用vim-plug
 安装：
-    1. mkdir ~/.vim/autoload
+    1. mkdir -p ~/.vim/autoload
     2. cp plug.vim ~/.vim/autoload/plug.vim
-       或者curl -XGET "https://github.com/junegunn/vim-plug/blob/master/plug.vim" -o ~/.vim/autoload/plug.vim
        或者curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 修改vimrc后执行:source %
 运行:PlugInstall or PlugClean
@@ -125,10 +130,16 @@ python3-dev     => yum install python3-devel
 使用指南：https://zhuanlan.zhihu.com/p/36279445
 使用指南：https://blog.csdn.net/weixin_33816821/article/details/91372655
 使用指南：https://zhuanlan.zhihu.com/p/64842373
-下载：http://tamacom.com/global/global-6.6.5.tar.gz
+下载安装：http://tamacom.com/global/global-6.6.5.tar.gz
+或者sudo apt-get install global
+
+### 配置gtags.conf
+从global-6.6.5或其它机器拷贝配置文件
+sudo cp gtags.conf /usr/local/share/gtags/gtags.conf
 
 
 ## Leaderf
+sudo apt-get install ripgrep
 
 
 ## deoplete.nvim
