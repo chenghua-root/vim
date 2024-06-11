@@ -14,8 +14,8 @@
   grm = log --oneline --graph --color --decorate --pretty=format:'%h %ar %an %s'
   glog = log --graph --pretty=oneline --abbrev-commit --color --decorate
 [user]
-  email = chenghua.ch@alibaba-inc.com
-  name = chenghua.ch
+  email = chenghua.root@gmail.com
+  name = chenghua
 [http]
   #连续800s传输速率低于200byte才会timeout
   lowSpeedTime = 800      # git config --global http.lowSpeedTime 800

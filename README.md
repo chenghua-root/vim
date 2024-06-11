@@ -4,7 +4,7 @@
 本vim配置参照韦易笑在知乎的回答[如何在Linux下利用Vim搭建C/C++ 开发环境?](https://www.zhihu.com/question/47691414/answer/373700711)
 
 ## 环境说明
-CentOS7 + VIM8(安装时依赖python3)
+CentOS7 | ubuntu20.04 | debain10 + VIM9(安装时依赖python3)
 vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 
 
@@ -23,7 +23,7 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
 - sudo apt install vim
 - vim --version
 
-## VIM8安装介绍
+## VIM9源码安装(centos/debain)
 1. 下载: git clone git@github.com:vim/vim.git
 2. 卸载原有VIM：sudo yum remove vim
 3. 安装依赖文件:
@@ -40,6 +40,7 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
      make -j4
      sudo make install
      sudo ln -s /usr/local/vim/bin/vim /usr/local/bin/vim
+5. :echo has('python3') 预期返回1
 
 说明：a) python3支持。python3自动识别configdif，不需要指定-with-python3-config-dir=xxx
       b) 重新编译之前需要执行make distclean
@@ -112,18 +113,6 @@ vimrc配置含义：https://zhuanlan.zhihu.com/p/137722838
   cd ~/.vim/pack/tpope/start
   git clone https://tpope.io/vim/unimpaired.git
   vim -u NONE -c "helptags unimpaired/doc" -c q
-
-
-## YCM
-YCM: https://github.com/ycm-core/YouCompleteMe
-YCM安装完全指南: https://github.com/ycm-core/YouCompleteMe/wiki/Full-Installation-Guide
-YouCompleteMe中容易忽略的配置: https://zhuanlan.zhihu.com/p/33046090
-
-### 安装依赖
-"apt install build-essential cmake vim python3-dev"
-build-essential => yum install gcc gcc-c++ make
-cmake           => yum install cmake
-python3-dev     => yum install python3-devel
 
 
 ## gtags

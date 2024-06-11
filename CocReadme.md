@@ -4,7 +4,7 @@ coc依赖node(>=16.18)
 安装node参考: https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
 - curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - && sudo apt-get install -y nodejs
 
-### clangd
+### clangd (open C/C++ files to run)
 :CocCommand clangd.install
 
 ## coc配置
