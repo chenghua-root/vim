@@ -53,6 +53,7 @@ hi Search ctermbg=DarkBlue ctermfg=GREEN
 set background=light
 hi Comment ctermfg=DarkBlue     " 注释颜色, LightBlue, 246
 
+set noswapfile       " 避免产生swap文件
 
 "**************************************************************************************************
 
@@ -282,7 +283,7 @@ nmap <unique> <leader>rd <Plug>LeaderfRgCwordRegexBoundary
 "==============================================================================
 " deoplete.nvim, 用于代码补全
 "==============================================================================
-" 代码补全使用coc插件
+" 代码补全使用coc插件，没再使用deoplete.vim
 "let g:deoplete#enable_at_startup = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"   "<TAB>: completion.
 "call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
